@@ -23,10 +23,10 @@ const LargeLayout = ({ intl }) => (
           >
             <div className='montserrat-font'>
               <div className="bigger-text">
-                {formatMessage(messages['start.learning'])}
+                {intl.formatMessage(messages['start.learning'])}
               </div>
               <div className="pumpkin-orange-text bigger-text">
-                {formatMessage(messages['with.site.name'], { siteName: getConfig().SITE_NAME })}
+                {intl.formatMessage(messages['with.site.name'], { siteName: getConfig().SITE_NAME })}
               </div>
             </div>
           </h1>
