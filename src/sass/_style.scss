@@ -1,12 +1,6 @@
 // Load component based styles
 @import "_base_component.scss";
-@import "_registration.scss";
-@import "_recommendations_page.scss";
-@import "_reset_password.scss";
-@import "_progressive_profiling_page.scss";
-@import "_login_page.scss";
-@import "_forgot_password.scss";
-@import "_recommendations_card_base.scss";
+
 //
 // ----------------------------
 // #COLORS
@@ -728,3 +722,9 @@ select.form-control {
 .font-weight-500{
   font-weight: 500;
 }
+
+// _login_page.scss START
+.login-button-width {
+  min-width: 6rem;
+}
+// _login_page.scss END
