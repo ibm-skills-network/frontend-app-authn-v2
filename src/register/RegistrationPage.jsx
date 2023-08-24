@@ -637,6 +637,12 @@ class RegistrationPage extends React.Component {
     );
   }
 
+  clickLoginPage = () => {
+    const loginTab = document.querySelector('[id="controlled-tab-tab-/login"]');
+    console.log(loginTab);
+    loginTab.click();
+  };
+
   renderForm(currentProvider,
     providers,
     secondaryProviders,
@@ -868,6 +874,13 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()}
             />
+
+            <div className='contain-and-center'>
+                <div className="login-page-box gray-text">
+                  Already have an account? <a id='login-page-link' onClick={this.clickLoginPage}>Log in here</a>
+                </div>
+              </div>
+
             {this.renderThirdPartyAuth(providers,
               secondaryProviders,
               currentProvider,
