@@ -14,7 +14,7 @@ const HonorCode = (props) => {
 
   if (fieldType === 'tos_and_honor_code') {
     return (
-      <div id="honor-code" className="micro mt-4">
+      <div id="honor-code" className="micro mt-4 w25-rem">
         <FormattedMessage
           id="register.page.terms.of.service.and.honor.code"
           defaultMessage="By creating an account, you agree to the {tosAndHonorCode} and you acknowledge that {platformName} and each
