@@ -35,7 +35,7 @@ const BaseComponent = ({ children, showWelcomeBanner }) => {
           {authenticatedUser ? <AuthLargeLayout username={username} /> : <LargeLayout />}
         </MediaQuery>
 
-        <div className={classNames('content', 'montserrat-font', { 'align-items-center mt-0': authenticatedUser })}>
+        <div className={classNames('content', 'padding-right-8rem', 'montserrat-font', { 'align-items-center mt-0': authenticatedUser })}>
           {children}
         </div>
       </div>

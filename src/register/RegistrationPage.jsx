@@ -754,7 +754,7 @@ class RegistrationPage extends React.Component {
           redirectToWelcomePage={getConfig().ENABLE_PROGRESSIVE_PROFILING
                  && Object.keys(this.props.optionalFields).length !== 0}
         />
-        <div className="mw-xs mt-3">
+        <div className="mw-xs mt-3 contain-and-center">
           {this.state.errorCode ? (
             <RegistrationFailure
               errorCode={this.state.errorCode}

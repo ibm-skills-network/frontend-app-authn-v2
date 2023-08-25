@@ -63,7 +63,7 @@ const Logistration = (props) => {
 
   return (
     <BaseComponent>
-      <div className='content-align-center montserrat-font'>
+      <div className='montserrat-font'>
         <div className='logistration-title'>
           {selectedPage === LOGIN_PAGE
             ? <>Log in to your account</>
