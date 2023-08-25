@@ -613,7 +613,7 @@ class RegistrationPage extends React.Component {
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="mt-4 mb-3 h4">
+          <div className="mt-4 mb-3 h4 flex-center">
             {intl.formatMessage(messages['registration.other.options.heading'])}
           </div>
         )}
@@ -629,7 +629,7 @@ class RegistrationPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="row m-0 flex-center">
                 <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
               </div>
             )}
@@ -756,7 +756,7 @@ class RegistrationPage extends React.Component {
           redirectToWelcomePage={getConfig().ENABLE_PROGRESSIVE_PROFILING
                  && Object.keys(this.props.optionalFields).length !== 0}
         />
-        <div className="mw-xs mt-3 contain-and-center">
+        <div className="mt-3">
           {this.state.errorCode ? (
             <RegistrationFailure
               errorCode={this.state.errorCode}
@@ -858,26 +858,30 @@ class RegistrationPage extends React.Component {
               </Form.Checkbox>
             )}
             {!(this.showDynamicRegistrationFields) ? (
-              <HonorCode
-                fieldType="tos_and_honor_code"
-              />
+              <div className='flex-center'>
+                <HonorCode
+                  fieldType="tos_and_honor_code"
+                />
+              </div>
             ) : <div>{honorCode}</div>}
-            <StatefulButton
-              name="register-user"
-              id="register-user"
-              type="submit"
-              variant="brand"
-              className="register-stateful-button-width mt-4 mb-4"
-              state={submitState}
-              labels={{
-                default: intl.formatMessage(messages['create.account.for.free.button']),
-                pending: '',
-              }}
-              onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
+            <div className='flex-center'>
+              <StatefulButton
+                name="register-user"
+                id="register-user"
+                type="submit"
+                variant="brand"
+                className="register-stateful-button-width mt-4 mb-4"
+                state={submitState}
+                labels={{
+                  default: intl.formatMessage(messages['create.account.for.free.button']),
+                  pending: '',
+                }}
+                onClick={this.handleSubmit}
+                onMouseDown={(e) => e.preventDefault()}
+              />
+            </div>
 
-            <div className='contain-and-center'>
+            <div className='flex-center'>
                 <div className="login-page-box gray-text">
                   Already have an account? <a id='login-page-link' onClick={this.clickLoginPage}>Log in here</a>
                 </div>
