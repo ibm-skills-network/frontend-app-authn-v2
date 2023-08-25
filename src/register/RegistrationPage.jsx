@@ -605,15 +605,12 @@ class RegistrationPage extends React.Component {
 
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
-    // const isSocialAuthActive = !!providers.length && !currentProvider;
-    // const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    const isSocialAuthActive = true;
-    const isEnterpriseLoginDisabled = false;
-    providers = ['Google', 'GitHub', 'Linkedin', 'Facebook', 'IBMid']
+    const isSocialAuthActive = !!providers.length && !currentProvider;
+    const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="mt-4 mb-3 h4 flex-center">
+          <div className="mt-4 mb-3 flex-center gray-text">
             {intl.formatMessage(messages['registration.other.options.heading'])}
           </div>
         )}
