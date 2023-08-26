@@ -314,7 +314,7 @@ class LoginPage extends React.Component {
                 id="sign-in"
                 type="submit"
                 variant="brand"
-                className="login-button-width mt-5"
+                className="login-button-width"
                 state={submitState}
                 labels={{
                   default: intl.formatMessage(messages['sign.in.button']),
@@ -324,7 +324,7 @@ class LoginPage extends React.Component {
                 onMouseDown={(e) => e.preventDefault()}
               />
             </div>
-            <div className='signin-page-box flex-center'>
+            <div className='signin-page-box flex-center mt-3'>
               <a>Don't have an account? <a className='sign-up-page-link' onClick={this.clickRegisterPage}>Sign up here</a></a>
             </div>
           </Form>
