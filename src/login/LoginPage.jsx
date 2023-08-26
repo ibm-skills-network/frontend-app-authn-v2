@@ -277,10 +277,9 @@ class LoginPage extends React.Component {
               errorMessage={this.state.errors.emailOrUsername}
               floatingLabel={intl.formatMessage(messages['login.user.identity.label'])}
             />
-            <div className='mt-2'>
+            <div className='mt-2 reduce-bottom-margin-1'>
               <PasswordField
                 name="password"
-                className="no-bottom-margin"
                 value={this.state.password}
                 autoComplete="off"
                 showRequirements={false}
