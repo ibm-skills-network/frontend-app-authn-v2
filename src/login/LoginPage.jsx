@@ -171,12 +171,9 @@ class LoginPage extends React.Component {
 
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
-    // const isSocialAuthActive = !!providers.length && !currentProvider;
-    // const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    const isSocialAuthActive = true;
-    const isEnterpriseLoginDisabled = false;
-    providers = ["google", "facebook", "github", "linkedin", "ibmid"]
-
+    const isSocialAuthActive = !!providers.length && !currentProvider;
+    const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
+    
     return (
       <>
         {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
