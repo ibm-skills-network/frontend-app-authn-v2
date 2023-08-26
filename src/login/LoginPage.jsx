@@ -173,13 +173,6 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
-          && (
-            <div className="mt-4 mb-3 h4">
-              {intl.formatMessage(messages['login.other.options.heading'])}
-            </div>
-          )}
-
         {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
           <Hyperlink className="btn btn-link btn-sm text-body p-0 mb-4" destination={this.getEnterPriseLoginURL()}>
             <Icon src={Institution} className="institute-icon" />
@@ -204,6 +197,13 @@ class LoginPage extends React.Component {
             )}
           </>
         )}
+
+        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
+          && (
+            <div className="mt-4 mb-3 fs-1p5-rem gray-text flex-center">
+              {intl.formatMessage(messages['login.other.options.heading'])}
+            </div>
+          )}
       </>
     );
   }
@@ -263,6 +263,7 @@ class LoginPage extends React.Component {
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
           {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null}
           <Form name="sign-in-form" id="sign-in-form">
+          {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
             <FormGroup
               name="emailOrUsername"
               value={this.state.emailOrUsername}
@@ -305,7 +306,7 @@ class LoginPage extends React.Component {
                 <Link
                   id="forgot-password"
                   name="forgot-password"
-                  className="btn btn-link font-weight-500 text-body"
+                  className=""
                   to={updatePathWithQueryParams(RESET_PAGE)}
                   onClick={this.handleForgotPasswordLinkClickEvent}
                 >
@@ -313,7 +314,6 @@ class LoginPage extends React.Component {
                 </Link>
               </div>
             </div>
-            {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
           </Form>
         </div>
       </div>
