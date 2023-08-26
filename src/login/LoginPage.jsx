@@ -163,6 +163,12 @@ class LoginPage extends React.Component {
     return errors.password;
   }
 
+  clickRegisterPage() {
+    const registerTab = document.querySelector('[id="controlled-tab-tab-/register"]');
+    console.log(registerTab);
+    registerTab.click();
+  };
+
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     // const isSocialAuthActive = !!providers.length && !currentProvider;
@@ -191,7 +197,7 @@ class LoginPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="row m-0 flex-center">
                 <SocialAuthProviders socialAuthProviders={providers} />
               </div>
             )}
@@ -250,7 +256,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         />
-        <div className="mw-xs mt-3">
+        <div className="mt-3">
           {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
@@ -274,33 +280,20 @@ class LoginPage extends React.Component {
               errorMessage={this.state.errors.emailOrUsername}
               floatingLabel={intl.formatMessage(messages['login.user.identity.label'])}
             />
-            <PasswordField
-              name="password"
-              value={this.state.password}
-              autoComplete="off"
-              showRequirements={false}
-              handleChange={(e) => this.setState({ password: e.target.value, isSubmitted: false })}
-              handleFocus={this.handleOnFocus}
-              handleBlur={this.handleOnBlur}
-              errorMessage={this.state.errors.password}
-              floatingLabel={intl.formatMessage(messages['login.password.label'])}
-            />
-            <div className='flex-center'>
-              <StatefulButton
-                name="sign-in"
-                id="sign-in"
-                type="submit"
-                variant="brand"
-                className="login-button-width"
-                state={submitState}
-                labels={{
-                  default: intl.formatMessage(messages['sign.in.button']),
-                  pending: '',
-                }}
-                onClick={this.handleSubmit}
-                onMouseDown={(e) => e.preventDefault()}
+            <div className='mt-2'>
+              <PasswordField
+                name="password"
+                value={this.state.password}
+                autoComplete="off"
+                showRequirements={false}
+                handleChange={(e) => this.setState({ password: e.target.value, isSubmitted: false })}
+                handleFocus={this.handleOnFocus}
+                handleBlur={this.handleOnBlur}
+                errorMessage={this.state.errors.password}
+                floatingLabel={intl.formatMessage(messages['login.password.label'])}
               />
             </div>
+
             <div className='forgot-password-container-outer margin-bottom-3rem'>
               <div className='forgot-password-container-inner'>
                 <Link
@@ -313,6 +306,26 @@ class LoginPage extends React.Component {
                   {intl.formatMessage(messages['forgot.password'])}
                 </Link>
               </div>
+            </div>
+
+            <div className='flex-center'>
+              <StatefulButton
+                name="sign-in"
+                id="sign-in"
+                type="submit"
+                variant="brand"
+                className="login-button-width mt-5"
+                state={submitState}
+                labels={{
+                  default: intl.formatMessage(messages['sign.in.button']),
+                  pending: '',
+                }}
+                onClick={this.handleSubmit}
+                onMouseDown={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className='signin-page-box'>
+              <a>Don't have an account? <a className='sign-up-page-link' onClick={this.clickRegisterPage}>Sign up here</a></a>
             </div>
           </Form>
         </div>
