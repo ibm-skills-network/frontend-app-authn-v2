@@ -253,7 +253,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         />
-        <div className="mt-3">
+        <div className="mt-5">
           {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
@@ -280,6 +280,7 @@ class LoginPage extends React.Component {
             <div className='mt-2'>
               <PasswordField
                 name="password"
+                className="no-bottom-margin"
                 value={this.state.password}
                 autoComplete="off"
                 showRequirements={false}
