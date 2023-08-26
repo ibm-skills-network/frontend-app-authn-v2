@@ -165,8 +165,11 @@ class LoginPage extends React.Component {
 
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
-    const isSocialAuthActive = !!providers.length && !currentProvider;
-    const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
+    // const isSocialAuthActive = !!providers.length && !currentProvider;
+    // const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
+    const isSocialAuthActive = true;
+    const isEnterpriseLoginDisabled = false;
+    providers = ["google", "facebook", "github", "linkedin", "ibmid"]
 
     return (
       <>
@@ -236,7 +239,7 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <>
+      <div className='flex-center'>
         <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
@@ -281,33 +284,39 @@ class LoginPage extends React.Component {
               errorMessage={this.state.errors.password}
               floatingLabel={intl.formatMessage(messages['login.password.label'])}
             />
-            <StatefulButton
-              name="sign-in"
-              id="sign-in"
-              type="submit"
-              variant="brand"
-              className="login-button-width"
-              state={submitState}
-              labels={{
-                default: intl.formatMessage(messages['sign.in.button']),
-                pending: '',
-              }}
-              onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
-            <Link
-              id="forgot-password"
-              name="forgot-password"
-              className="btn btn-link font-weight-500 text-body"
-              to={updatePathWithQueryParams(RESET_PAGE)}
-              onClick={this.handleForgotPasswordLinkClickEvent}
-            >
-              {intl.formatMessage(messages['forgot.password'])}
-            </Link>
+            <div className='flex-center'>
+              <StatefulButton
+                name="sign-in"
+                id="sign-in"
+                type="submit"
+                variant="brand"
+                className="login-button-width"
+                state={submitState}
+                labels={{
+                  default: intl.formatMessage(messages['sign.in.button']),
+                  pending: '',
+                }}
+                onClick={this.handleSubmit}
+                onMouseDown={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className='forgot-password-container-outer margin-bottom-3rem'>
+              <div className='forgot-password-container-inner'>
+                <Link
+                  id="forgot-password"
+                  name="forgot-password"
+                  className="btn btn-link font-weight-500 text-body"
+                  to={updatePathWithQueryParams(RESET_PAGE)}
+                  onClick={this.handleForgotPasswordLinkClickEvent}
+                >
+                  {intl.formatMessage(messages['forgot.password'])}
+                </Link>
+              </div>
+            </div>
             {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
           </Form>
         </div>
-      </>
+      </div>
     );
   }
 
