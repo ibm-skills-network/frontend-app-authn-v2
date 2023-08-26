@@ -324,7 +324,7 @@ class LoginPage extends React.Component {
                 onMouseDown={(e) => e.preventDefault()}
               />
             </div>
-            <div className='signin-page-box flex-center mt-3'>
+            <div className='signin-page-box flex-center'>
               <a>Don't have an account? <a className='sign-up-page-link' onClick={this.clickRegisterPage}>Sign up here</a></a>
             </div>
           </Form>
