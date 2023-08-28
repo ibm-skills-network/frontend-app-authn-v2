@@ -774,6 +774,7 @@ class RegistrationPage extends React.Component {
           <Form id="registration-form" name="registration-form">
             <FormGroup
               name="name"
+              className="grid-1"
               value={this.state.name}
               autoComplete="on"
               handleBlur={this.handleOnBlur}
@@ -785,6 +786,7 @@ class RegistrationPage extends React.Component {
             />
             <FormGroup
               name="email"
+              className="grid-1"
               value={this.state.email}
               autoComplete="on"
               handleBlur={this.handleOnBlur}
@@ -800,6 +802,7 @@ class RegistrationPage extends React.Component {
 
             <UsernameField
               name="username"
+              className="small-margin-bottom grid-1"
               spellCheck="false"
               value={this.state.username}
               autoComplete="on"

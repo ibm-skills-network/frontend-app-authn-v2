@@ -784,6 +784,18 @@ select.form-control {
   text-decoration: underline;
 }
 
+.grid-1 {
+  width: 100%;
+  display: grid !important;
+  gap: 5px;
+  grid-template-columns: repeat(1, minmax(0,1fr));
+  place-items: center;
+}
+
+.small-margin-bottom {
+  margin-bottom: 1rem;
+}
+
 // login page CSS
 
 .no-mie-important {
