@@ -607,11 +607,10 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="mt-4 mb-3 h4">
+          <div className="mt-4 mb-3 flex-center gray-text">
             {intl.formatMessage(messages['registration.other.options.heading'])}
           </div>
         )}
@@ -627,7 +626,7 @@ class RegistrationPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="row m-0 flex-center">
                 <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
               </div>
             )}
@@ -636,6 +635,12 @@ class RegistrationPage extends React.Component {
       </>
     );
   }
+
+  clickLoginPage = () => {
+    const loginTab = document.querySelector('[id="controlled-tab-tab-/login"]');
+    console.log(loginTab);
+    loginTab.click();
+  };
 
   renderForm(currentProvider,
     providers,
@@ -748,7 +753,7 @@ class RegistrationPage extends React.Component {
           redirectToWelcomePage={getConfig().ENABLE_PROGRESSIVE_PROFILING
                  && Object.keys(this.props.optionalFields).length !== 0}
         />
-        <div className="mw-xs mt-3">
+        <div className="mt-3">
           {this.state.errorCode ? (
             <RegistrationFailure
               errorCode={this.state.errorCode}
@@ -769,6 +774,7 @@ class RegistrationPage extends React.Component {
           <Form id="registration-form" name="registration-form">
             <FormGroup
               name="name"
+              className="grid-1"
               value={this.state.name}
               autoComplete="on"
               handleBlur={this.handleOnBlur}
@@ -780,6 +786,7 @@ class RegistrationPage extends React.Component {
             />
             <FormGroup
               name="email"
+              className="grid-1"
               value={this.state.email}
               autoComplete="on"
               handleBlur={this.handleOnBlur}
@@ -795,6 +802,7 @@ class RegistrationPage extends React.Component {
 
             <UsernameField
               name="username"
+              className="small-margin-bottom grid-1"
               spellCheck="false"
               value={this.state.username}
               autoComplete="on"
@@ -850,24 +858,35 @@ class RegistrationPage extends React.Component {
               </Form.Checkbox>
             )}
             {!(this.showDynamicRegistrationFields) ? (
-              <HonorCode
-                fieldType="tos_and_honor_code"
-              />
+              <div className='flex-center'>
+                <HonorCode
+                  fieldType="tos_and_honor_code"
+                />
+              </div>
             ) : <div>{honorCode}</div>}
-            <StatefulButton
-              name="register-user"
-              id="register-user"
-              type="submit"
-              variant="brand"
-              className="register-stateful-button-width mt-4 mb-4"
-              state={submitState}
-              labels={{
-                default: intl.formatMessage(messages['create.account.for.free.button']),
-                pending: '',
-              }}
-              onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
+            <div className='flex-center'>
+              <StatefulButton
+                name="register-user"
+                id="register-user"
+                type="submit"
+                variant="brand"
+                className="w25-rem register-stateful-button-width mt-4 mb-4"
+                state={submitState}
+                labels={{
+                  default: intl.formatMessage(messages['create.account.for.free.button']),
+                  pending: '',
+                }}
+                onClick={this.handleSubmit}
+                onMouseDown={(e) => e.preventDefault()}
+              />
+            </div>
+
+            <div className='flex-center'>
+                <div className="login-page-box gray-text">
+                  Already have an account? <a id='login-page-link' onClick={this.clickLoginPage}>Log in here</a>
+                </div>
+              </div>
+
             {this.renderThirdPartyAuth(providers,
               secondaryProviders,
               currentProvider,

@@ -163,20 +163,19 @@ class LoginPage extends React.Component {
     return errors.password;
   }
 
+  clickRegisterPage() {
+    const registerTab = document.querySelector('[id="controlled-tab-tab-/register"]');
+    console.log(registerTab);
+    registerTab.click();
+  };
+
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-
+    
     return (
       <>
-        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
-          && (
-            <div className="mt-4 mb-3 h4">
-              {intl.formatMessage(messages['login.other.options.heading'])}
-            </div>
-          )}
-
         {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
           <Hyperlink className="btn btn-link btn-sm text-body p-0 mb-4" destination={this.getEnterPriseLoginURL()}>
             <Icon src={Institution} className="institute-icon" />
@@ -195,12 +194,19 @@ class LoginPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="row m-0 flex-center">
                 <SocialAuthProviders socialAuthProviders={providers} />
               </div>
             )}
           </>
         )}
+
+        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
+          && (
+            <div className="mt-4 mb-3 fs-1p5-rem gray-text flex-center">
+              {intl.formatMessage(messages['login.other.options.heading'])}
+            </div>
+          )}
       </>
     );
   }
@@ -236,7 +242,7 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <>
+      <div className='flex-center'>
         <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
@@ -247,7 +253,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         />
-        <div className="mw-xs mt-3">
+        <div className="mt-5">
           {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
@@ -260,6 +266,7 @@ class LoginPage extends React.Component {
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
           {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null}
           <Form name="sign-in-form" id="sign-in-form">
+          {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
             <FormGroup
               name="emailOrUsername"
               value={this.state.emailOrUsername}
@@ -270,44 +277,56 @@ class LoginPage extends React.Component {
               errorMessage={this.state.errors.emailOrUsername}
               floatingLabel={intl.formatMessage(messages['login.user.identity.label'])}
             />
-            <PasswordField
-              name="password"
-              value={this.state.password}
-              autoComplete="off"
-              showRequirements={false}
-              handleChange={(e) => this.setState({ password: e.target.value, isSubmitted: false })}
-              handleFocus={this.handleOnFocus}
-              handleBlur={this.handleOnBlur}
-              errorMessage={this.state.errors.password}
-              floatingLabel={intl.formatMessage(messages['login.password.label'])}
-            />
-            <StatefulButton
-              name="sign-in"
-              id="sign-in"
-              type="submit"
-              variant="brand"
-              className="login-button-width"
-              state={submitState}
-              labels={{
-                default: intl.formatMessage(messages['sign.in.button']),
-                pending: '',
-              }}
-              onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
-            <Link
-              id="forgot-password"
-              name="forgot-password"
-              className="btn btn-link font-weight-500 text-body"
-              to={updatePathWithQueryParams(RESET_PAGE)}
-              onClick={this.handleForgotPasswordLinkClickEvent}
-            >
-              {intl.formatMessage(messages['forgot.password'])}
-            </Link>
-            {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
+            <div className='mt-2 reduce-bottom-margin-1'>
+              <PasswordField
+                name="password"
+                value={this.state.password}
+                autoComplete="off"
+                showRequirements={false}
+                handleChange={(e) => this.setState({ password: e.target.value, isSubmitted: false })}
+                handleFocus={this.handleOnFocus}
+                handleBlur={this.handleOnBlur}
+                errorMessage={this.state.errors.password}
+                floatingLabel={intl.formatMessage(messages['login.password.label'])}
+              />
+            </div>
+
+            <div className='forgot-password-container-outer margin-bottom-3rem'>
+              <div className='forgot-password-container-inner'>
+                <Link
+                  id="forgot-password"
+                  name="forgot-password"
+                  className=""
+                  to={updatePathWithQueryParams(RESET_PAGE)}
+                  onClick={this.handleForgotPasswordLinkClickEvent}
+                >
+                  {intl.formatMessage(messages['forgot.password'])}
+                </Link>
+              </div>
+            </div>
+
+            <div className='flex-center'>
+              <StatefulButton
+                name="sign-in"
+                id="sign-in"
+                type="submit"
+                variant="brand"
+                className="login-button-width"
+                state={submitState}
+                labels={{
+                  default: intl.formatMessage(messages['sign.in.button']),
+                  pending: '',
+                }}
+                onClick={this.handleSubmit}
+                onMouseDown={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className='signin-page-box flex-center mt-3'>
+              <a>Don't have an account? <a className='sign-up-page-link' onClick={this.clickRegisterPage}>Sign up here</a></a>
+            </div>
           </Form>
         </div>
-      </>
+      </div>
     );
   }
 

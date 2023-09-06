@@ -55,11 +55,11 @@ const PasswordField = (props) => {
   );
 
   return (
-    <Form.Group controlId={props.name} isInvalid={props.errorMessage !== ''}>
+    <Form.Group className='grid-1' controlId={props.name} isInvalid={props.errorMessage !== ''}>
       <OverlayTrigger key="tooltip" placement={placement} overlay={tooltip} show={showTooltip}>
         <Form.Control
           as="input"
-          className="form-field"
+          className="form-field no-mie-important"
           type={isPasswordHidden ? 'password' : 'text'}
           name={props.name}
           value={props.value}

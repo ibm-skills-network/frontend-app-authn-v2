@@ -188,7 +188,7 @@ class CountryDropdown extends React.Component {
           as="input"
           name={this.props.name}
           autoComplete="off"
-          className="mb-0"
+          className="mb-0 grid-1"
           floatingLabel={this.props.floatingLabel}
           trailingElement={this.state.icon}
           handleChange={this.handleOnChange}
